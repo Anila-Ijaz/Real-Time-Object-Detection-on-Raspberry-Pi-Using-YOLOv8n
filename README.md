@@ -1,6 +1,6 @@
 # Real-Time Object Detection on Raspberry Pi Using YOLOv8n
 
-Lightweight real-time shape detection on Raspberry Pi. The project starts from a **classical OpenCV computer-vision baseline** (edge detection + contour analysis) that re-implements Abdulhamid, Odondi & Al-Rawi (2020), and extends it into a **learning-based YOLOv8-nano pipeline** that covers dataset generation, auto-labeling, training/fine-tuning, inference, and quantitative evaluation.
+Lightweight real-time shape detection on Raspberry Pi. The project starts from a **classical OpenCV computer-vision baseline** (edge detection + contour analysis) that re-implements, and extends it into a **learning-based YOLOv8-nano pipeline** that covers dataset generation, auto-labeling, training/fine-tuning, inference, and quantitative evaluation.
 
 The task in both pipelines is the same: **detect geometric objects in an image and classify each one as `triangular`, `rectangular`, or `polygon`** (any shape with more than four edges).
 
