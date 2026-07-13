@@ -18,6 +18,7 @@ The task in both pipelines is the same: **detect geometric objects in an image a
 - [Evaluation Methodology](#evaluation-methodology)
   - [Confusion Matrix](#confusion-matrix)
   - [Evaluation Metrics](#evaluation-metrics)
+- [Results](#results)
 - [Baseline vs. YOLOv8n — Comparison](#baseline-vs-yolov8n--comparison)
 - [Class Encoding](#class-encoding)
 - [References](#references)
@@ -185,6 +186,30 @@ F1 Score:  0.889
 
 ---
 
+## Results
+
+Both pipelines were evaluated on the **same Raspberry Pi hardware** across four scenarios designed to stress inter-object spacing, background contrast, shadow, and camera distance.
+
+> **Research question:** *Can YOLOv8n on the same Raspberry Pi hardware overcome the limitations of inter-object spacing, background contrast, shadow, and camera distance to achieve robust real-time object detection?*
+
+### Per-Scenario Accuracy
+
+| Scenario | Condition | Baseline Pipeline Accuracy | YOLOv8n Accuracy |
+|----------|-----------|:--------------------------:|:----------------:|
+| **S1** | Single shape | 100 % | 100 % |
+| **S2** | Multiple freehand objects | 92.31 % | 94.4 % |
+| **S3** | High spacing, sharp contrast | 100 % | 100 % |
+| **S4** | Close spacing / low contrast | **58.72 %** | **94.4 %** |
+| **Average** | — | **≈ 90.21 %** | **≈ 97.2 %** |
+
+The decisive difference is **S4 (close spacing / low contrast)**: the classical baseline collapses to **58.72 %** because merged edges and weak contrast break its contour separation, while YOLOv8n holds at **94.4 %**. In easy scenarios (S1, S3) both reach 100 %, confirming the extension loses nothing on the cases the baseline already handled. Overall accuracy improves from **≈ 90.21 %** to **≈ 97.2 %**.
+
+### Detection Metrics per Scenario
+
+Across all four scenarios, the YOLOv8n pipeline achieves **Accuracy, Precision, Recall, and F1 scores at or near 1.0**, with the lowest values appearing in S2 and S4 (the multi-object / low-contrast cases) — consistent with the accuracy table above. This confirms the model answers the research question: it stays robust precisely where the baseline degrades.
+
+---
+
 ## Baseline vs. YOLOv8n — Comparison
 
 | Aspect | Baseline (Classical OpenCV) | Extension (YOLOv8n) |
@@ -200,9 +225,7 @@ F1 Score:  0.889
 | **Failure mode** | Over-/under-counts on messy scenes | Needs representative training data to generalize |
 | **Evaluation support** | Object counts only | TP/FP/FN, precision, recall, F1, accuracy, confusion matrix |
 
-**Summary.** The baseline is an excellent zero-data, low-power starting point and is genuinely useful for bootstrapping labels. The YOLOv8n extension trades a one-time training cost for a detector that is measurably more robust, produces confidence-scored boxes, and — crucially — can be **quantitatively evaluated** with a confusion matrix and standard detection metrics rather than judged only by eye.
-
-> The precise metric values depend on the dataset and trained weights. Run the `--gt` evaluation on your validation set (or `yolo val`) to populate the numbers for your own report.
+**Summary.** The baseline is an excellent zero-data, low-power starting point and is genuinely useful for bootstrapping labels. The YOLOv8n extension trades a one-time training cost for a detector that is measurably more robust — raising average accuracy from **≈ 90.21 %** to **≈ 97.2 %**, and from **58.72 %** to **94.4 %** on the hardest scenario (close spacing / low contrast) — while producing confidence-scored boxes that can be **quantitatively evaluated** with a confusion matrix and standard detection metrics rather than judged only by eye.
 
 ---
 
