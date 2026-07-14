@@ -21,6 +21,7 @@ The task in both pipelines is the same: **detect geometric objects in an image a
 - [Results](#results)
 - [Baseline vs. YOLOv8n — Comparison](#baseline-vs-yolov8n--comparison)
 - [Class Encoding](#class-encoding)
+- [Future Work](#future-work)
 - [References](#references)
 
 ---
@@ -236,6 +237,14 @@ Across all four scenarios, the YOLOv8n pipeline achieves **Accuracy, Precision, 
 | 0 | `triangular` | 3 | Green `(0, 255, 0)` |
 | 1 | `rectangular` | 4 | Red `(0, 0, 255)` |
 | 2 | `polygon` | > 4 | Blue `(255, 0, 0)` |
+
+---
+
+## Future Work
+
+- **Explore newer YOLO versions** (e.g. YOLOv9/v10/v11) to push accuracy higher and improve the detection metrics beyond the current YOLOv8n results.
+- **Add real-time live detection on the Raspberry Pi** — streaming inference on the camera feed rather than single-image capture — for more accurate, continuous results.
+- **Train on more 3D images** to build a dataset that supports robust 3D object detection under varied viewpoints and lighting.
 
 ---
 
