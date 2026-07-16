@@ -175,9 +175,9 @@ From the TP/FP/FN counts, `compute_metrics` derives the following (all in `Yolo_
 Example console output from `--gt`:
 
 ```
-====================================================
+=====================================
   EVALUATION METRICS
-====================================================
+=====================================
 TP=12  FP=2  FN=1
 Accuracy:  0.800
 Precision: 0.857
